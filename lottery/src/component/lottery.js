@@ -44,14 +44,14 @@ export default class Lottery extends React.Component {
     createLotteryNumbers = () => {
         let numbers = [];
         while (numbers.length < 6) {
-            let number = this.createLotteryNumber();
+            let number = this.createNumber();
             if (!numbers.includes(number))
                 numbers.push(number);
         }
-        return undefined;
+        return numbers;
     }
 
-    createLotteryNumber = (min = 1, max = 49) => {
+    createNumber = (min = 1, max = 49) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
