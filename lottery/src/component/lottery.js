@@ -21,6 +21,39 @@ export default class Lottery extends React.Component {
     }
 */
     render() {
+        let resetButton = "";
+        let lotteryNumbersCard = "";
+        if (this.state.numbers.length>0){
+            resetButton = <button className="btn btn-warning" onClick={this.resetNumbers}>Reset</button>;
+            lotteryNumbersCard = <div className="card">
+                <div className="card-header">
+                    <h3 className="card-title">Lottery Numbers</h3>
+                </div>
+                <div className="card-body">
+                    <table className="table table-striped table-bordered table-responsive table-hover">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            {
+                                Array.from(Array(6).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
+                            }
+                            <th>Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.state.numbers.map(
+                                (nums, idx) => <LotteryRow removeClick={this.removeRow}
+                                                           key={idx}
+                                                           index={idx}
+                                                           numbers={nums}></LotteryRow>
+                            )
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>;
+        }
         return (
             <div className="container">
                 <div className="card">
@@ -37,39 +70,12 @@ export default class Lottery extends React.Component {
                                    className="form-control"
                                    type="text"></input>
                             <button className="btn btn-success" onClick={this.draw}>Draw</button>
-                            <button className="btn btn-warning" onClick={this.resetNumbers}>Reset</button>
+                            {resetButton}
                         </div>
                     </div>
                 </div>
                 <p></p>
-                <div className="card">
-                    <div className="card-header">
-                        <h3 className="card-title">Lottery Numbers</h3>
-                    </div>
-                    <div className="card-body">
-                        <table className="table table-striped table-bordered table-responsive table-hover">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                {
-                                    Array.from(Array(6).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
-                                }
-                                <th>Operations</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.numbers.map(
-                                    (nums, idx) => <LotteryRow removeClick={this.removeRow}
-                                                                         key={idx}
-                                                                         index={idx}
-                                                                         numbers={nums}></LotteryRow>
-                                )
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                {lotteryNumbersCard}
             </div>
         );
     }
