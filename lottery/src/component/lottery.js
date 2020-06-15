@@ -23,8 +23,32 @@ export default class Lottery extends React.Component {
                                    name="column"
                                    className="form-control"
                                    type="text"></input>
-                            <button className="btn btn-success" onClick={this.draw()}>Draw</button>
+                            <button className="btn btn-success" onClick={this.draw}>Draw</button>
                         </div>
+                    </div>
+                </div>
+                <p></p>
+                <div className="card">
+                    <div className="card-header">
+                        <h3 className="card-title">Lottery Numbers</h3>
+                    </div>
+                    <div className="card-body">
+                        <table className="table table-striped table-bordered table-responsive table-hover">
+                            <thead>
+                               <tr>
+                                   {
+                                      Array.from(Array(6).keys()).map( col => <th key={col}>Column #{col+1}</th>)
+                                   }
+                               </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.numbers.map( (nums,idx) => <tr key={idx}>{
+                                    nums.map(num => <td key={num}>{num}</td>)
+                                }</tr>)
+                            }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -48,6 +72,7 @@ export default class Lottery extends React.Component {
             if (!numbers.includes(number))
                 numbers.push(number);
         }
+        numbers.sort((x,y)=>x-y);
         return numbers;
     }
 
