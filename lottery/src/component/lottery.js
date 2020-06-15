@@ -94,8 +94,20 @@ export default class Lottery extends React.Component {
 
     handleColumnChange = (event) => {
         let newColumn = Number(event.target.value);
+        console.log(`new column value has arrived: ${newColumn}`);
+        // This state change is asynchronous
+        /*
         this.setState({
             column: newColumn
-        });
+        })
+         */
+        this.setState((state,props) => {
+            // Rest API call: Fetch Api (ES 6)
+            // File Api (HTML 5)
+            return { // this is new state
+                column: newColumn
+            }
+        })
+        console.log(this.state.column)
     }
 }
