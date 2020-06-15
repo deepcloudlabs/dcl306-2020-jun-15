@@ -1,4 +1,5 @@
 import * as React from "react";
+import LotteryRow from "./lottery-row";
 
 export default class Lottery extends React.Component {
     constructor(props) {
@@ -58,15 +59,12 @@ export default class Lottery extends React.Component {
                             </thead>
                             <tbody>
                             {
-                                this.state.numbers.map((nums, idx) => <tr key={idx}>
-                                    <td>{idx+1}</td>{
-                                    nums.map(num => <td key={num}>{num}</td>)
-                                }
-                                    <td>
-                                        <button onClick={() => this.removeRow(idx)}
-                                                className="btn btn-danger">Remove</button>
-                                    </td>
-                                </tr>)
+                                this.state.numbers.map(
+                                    (nums, idx) => <LotteryRow removeClick={this.removeRow}
+                                                                         key={idx}
+                                                                         index={idx}
+                                                                         numbers={nums}></LotteryRow>
+                                )
                             }
                             </tbody>
                         </table>
