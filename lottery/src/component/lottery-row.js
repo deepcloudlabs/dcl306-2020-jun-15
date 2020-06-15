@@ -9,11 +9,6 @@ export default class LotteryRow extends React.Component {
         removeClick: PropTypes.func.isRequired
     }
 
-    // state + props
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <tr key={this.props.index}>
