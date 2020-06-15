@@ -36,7 +36,7 @@ export default class Lottery extends React.Component {
                                    className="form-control"
                                    type="text"></input>
                             <button className="btn btn-success" onClick={this.draw}>Draw</button>
-                            <button className="btn btn-warning">Reset</button>
+                            <button className="btn btn-warning" onClick={this.resetNumbers}>Reset</button>
                         </div>
                     </div>
                 </div>
@@ -49,6 +49,7 @@ export default class Lottery extends React.Component {
                         <table className="table table-striped table-bordered table-responsive table-hover">
                             <thead>
                             <tr>
+                                <th>No</th>
                                 {
                                     Array.from(Array(6).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
                                 }
@@ -57,10 +58,14 @@ export default class Lottery extends React.Component {
                             </thead>
                             <tbody>
                             {
-                                this.state.numbers.map((nums, idx) => <tr key={idx}>{
+                                this.state.numbers.map((nums, idx) => <tr key={idx}>
+                                    <td>{idx+1}</td>{
                                     nums.map(num => <td key={num}>{num}</td>)
                                 }
-                                <td><button className="btn btn-danger">Remove</button></td>
+                                    <td>
+                                        <button onClick={() => this.removeRow(idx)}
+                                                className="btn btn-danger">Remove</button>
+                                    </td>
                                 </tr>)
                             }
                             </tbody>
@@ -105,13 +110,28 @@ export default class Lottery extends React.Component {
             column: newColumn
         })
          */
-        this.setState((state,props) => {
-            // Rest API call: Fetch Api (ES 6)
-            // File Api (HTML 5)
-            return { // this is new state
-                column: newColumn
-            }
+        this.setState((state, props) => {
+                // Rest API call: Fetch Api (ES 6)
+                // File Api (HTML 5)
+                return { // this is new state
+                    column: newColumn
+                }
+            }, () => console.log(this.state.column)
+        );
+
+    }
+
+    resetNumbers = () => {
+        this.setState({
+            numbers: []
         })
-        console.log(this.state.column)
+    }
+
+    removeRow = (index) => {
+        // functional programming -> functional way of thinking!
+        let newNumbers = this.state.numbers.filter((num,idx) => index !== idx);
+        this.setState({
+            numbers: newNumbers
+        })
     }
 }
