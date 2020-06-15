@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default class Lottery extends React.Component {
     static propTypes = {
-        min : PropTypes.number,
+        min: PropTypes.number,
         max: PropTypes.number,
         size: PropTypes.number
     }
@@ -13,6 +13,7 @@ export default class Lottery extends React.Component {
         max: 2000,
         size: 3
     }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -34,7 +35,7 @@ export default class Lottery extends React.Component {
     render() {
         let resetButton = "";
         let lotteryNumbersCard = "";
-        if (this.state.numbers.length>0){
+        if (this.state.numbers.length > 0) {
             resetButton = <button className="btn btn-warning" onClick={this.resetNumbers}>Reset</button>;
             lotteryNumbersCard = <div className="card">
                 <div className="card-header">
@@ -46,7 +47,8 @@ export default class Lottery extends React.Component {
                         <tr>
                             <th>No</th>
                             {
-                                Array.from(Array(this.props.size).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
+                                Array.from(Array(this.props.size).keys()).map(col => <th key={col}>Column
+                                    #{col + 1}</th>)
                             }
                             <th>Operations</th>
                         </tr>
@@ -104,7 +106,7 @@ export default class Lottery extends React.Component {
     createLotteryNumbers = () => {
         let numbers = [];
         while (numbers.length < this.props.size) {
-            let number = this.createNumber(this.props.min,this.props.max);
+            let number = this.createNumber(this.props.min, this.props.max);
             if (!numbers.includes(number))
                 numbers.push(number);
         }
@@ -144,7 +146,7 @@ export default class Lottery extends React.Component {
 
     removeRow = (index) => {
         // functional programming -> functional way of thinking!
-        let newNumbers = this.state.numbers.filter((num,idx) => index !== idx);
+        let newNumbers = this.state.numbers.filter((num, idx) => index !== idx);
         this.setState({
             numbers: newNumbers
         })
