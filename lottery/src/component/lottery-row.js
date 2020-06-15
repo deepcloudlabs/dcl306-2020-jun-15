@@ -1,12 +1,17 @@
 import * as React from "react";
+import PropTypes from "prop-types";
+
 // Component
 export default class LotteryRow extends React.Component{
+    static propTypes = {
+        numbers : PropTypes.array.isRequired,
+        index: PropTypes.number.isRequired,
+        removeClick: PropTypes.func.isRequired
+    }
     // state + props
     constructor(props) {
         super(props);
     }
-
-
     render() {
         return (
             <tr key={this.props.index}>

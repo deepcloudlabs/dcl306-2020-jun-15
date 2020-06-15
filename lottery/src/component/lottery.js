@@ -1,7 +1,18 @@
 import * as React from "react";
 import LotteryRow from "./lottery-row";
+import PropTypes from "prop-types";
 
 export default class Lottery extends React.Component {
+    static propTypes = {
+        min : PropTypes.number,
+        max: PropTypes.number,
+        size: PropTypes.number
+    }
+    static  defaultProps = {
+        min: 1,
+        max: 2000,
+        size: 3
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +46,7 @@ export default class Lottery extends React.Component {
                         <tr>
                             <th>No</th>
                             {
-                                Array.from(Array(6).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
+                                Array.from(Array(this.props.size).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
                             }
                             <th>Operations</th>
                         </tr>
@@ -92,8 +103,8 @@ export default class Lottery extends React.Component {
 
     createLotteryNumbers = () => {
         let numbers = [];
-        while (numbers.length < 6) {
-            let number = this.createNumber();
+        while (numbers.length < this.props.size) {
+            let number = this.createNumber(this.props.min,this.props.max);
             if (!numbers.includes(number))
                 numbers.push(number);
         }
