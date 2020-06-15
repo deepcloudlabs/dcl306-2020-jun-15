@@ -36,6 +36,7 @@ export default class Lottery extends React.Component {
                                    className="form-control"
                                    type="text"></input>
                             <button className="btn btn-success" onClick={this.draw}>Draw</button>
+                            <button className="btn btn-warning">Reset</button>
                         </div>
                     </div>
                 </div>
@@ -51,13 +52,16 @@ export default class Lottery extends React.Component {
                                 {
                                     Array.from(Array(6).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
                                 }
+                                <th>Operations</th>
                             </tr>
                             </thead>
                             <tbody>
                             {
                                 this.state.numbers.map((nums, idx) => <tr key={idx}>{
                                     nums.map(num => <td key={num}>{num}</td>)
-                                }</tr>)
+                                }
+                                <td><button className="btn btn-danger">Remove</button></td>
+                                </tr>)
                             }
                             </tbody>
                         </table>
