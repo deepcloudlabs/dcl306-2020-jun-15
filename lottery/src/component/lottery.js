@@ -9,6 +9,16 @@ export default class Lottery extends React.Component {
         }
     }
 
+    /*
+    componentDidMount() {
+        setInterval(()=>{
+            let newColumn = this.state.column + 1;
+            this.setState({
+                column: newColumn
+            });
+        }, 1000);
+    }
+*/
     render() {
         return (
             <div className="container">
@@ -21,6 +31,8 @@ export default class Lottery extends React.Component {
                             <label htmlFor="column">Column:</label>
                             <input id="column"
                                    name="column"
+                                   value={this.state.column}
+                                   onChange={this.handleColumnChange}
                                    className="form-control"
                                    type="text"></input>
                             <button className="btn btn-success" onClick={this.draw}>Draw</button>
@@ -35,15 +47,15 @@ export default class Lottery extends React.Component {
                     <div className="card-body">
                         <table className="table table-striped table-bordered table-responsive table-hover">
                             <thead>
-                               <tr>
-                                   {
-                                      Array.from(Array(6).keys()).map( col => <th key={col}>Column #{col+1}</th>)
-                                   }
-                               </tr>
+                            <tr>
+                                {
+                                    Array.from(Array(6).keys()).map(col => <th key={col}>Column #{col + 1}</th>)
+                                }
+                            </tr>
                             </thead>
                             <tbody>
                             {
-                                this.state.numbers.map( (nums,idx) => <tr key={idx}>{
+                                this.state.numbers.map((nums, idx) => <tr key={idx}>{
                                     nums.map(num => <td key={num}>{num}</td>)
                                 }</tr>)
                             }
@@ -56,7 +68,7 @@ export default class Lottery extends React.Component {
     }
 
     draw = () => { // arrow function, lambda expression
-        let numbers = [];
+        let numbers = Array.from(this.state.numbers);
         for (let i = 0; i < this.state.column; ++i) {
             numbers.push(this.createLotteryNumbers());
         }
@@ -72,11 +84,18 @@ export default class Lottery extends React.Component {
             if (!numbers.includes(number))
                 numbers.push(number);
         }
-        numbers.sort((x,y)=>x-y);
+        numbers.sort((x, y) => x - y);
         return numbers;
     }
 
     createNumber = (min = 1, max = 49) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    handleColumnChange = (event) => {
+        let newColumn = Number(event.target.value);
+        this.setState({
+            column: newColumn
+        });
     }
 }
