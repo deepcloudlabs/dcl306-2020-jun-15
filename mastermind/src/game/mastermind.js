@@ -1,5 +1,6 @@
 import * as React from "react";
 import Move from "./move";
+import GameStatistics from "../statistics/game-statistics";
 
 export default class Mastermind extends React.Component {
     MAX_COUNTER = 100;
@@ -12,7 +13,9 @@ export default class Mastermind extends React.Component {
             moves: [],
             counter: this.MAX_COUNTER,
             guess: 123,
-            secret: this.createSecret(3)
+            secret: this.createSecret(3),
+            wins: 0,
+            loses: 0
         };
     }
 
@@ -95,6 +98,8 @@ export default class Mastermind extends React.Component {
                         </table>
                     </div>
                 </div>
+                <p></p>
+                <GameStatistics></GameStatistics>
             </div>
         );
     }
