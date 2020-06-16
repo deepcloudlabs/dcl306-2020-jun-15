@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Employee from "./component/employee-component";
+import EmployeeConnector from "./component/employee-connector";
 
 function App() {
     return (
         <div className="container">
-            <Employee></Employee>
+            <EmployeeConnector></EmployeeConnector>
         </div>
     );
 }
