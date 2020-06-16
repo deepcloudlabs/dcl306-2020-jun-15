@@ -83,6 +83,9 @@ export default class Mastermind extends React.Component {
                             <button onClick={this.play}
                                     className="btn btn-success">Play
                             </button>
+                            <button onClick={this.cleanStore}
+                                    className="btn btn-warning">Start over
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -150,6 +153,16 @@ export default class Mastermind extends React.Component {
     handleInputGuess = (e) => {
         let value = Number(e.target.value);
         this.setState({guess: value});
+    }
+
+    cleanStore = () => {
+        let game = {...this.state};
+        game.gameLevel=3;
+        game.wins=0;
+        game.loses=0;
+        this.initGame(game);
+        localStorage.setItem("mastermind", JSON.stringify(game));
+        this.setState(game);
     }
 
     createSecret = (level) => {
