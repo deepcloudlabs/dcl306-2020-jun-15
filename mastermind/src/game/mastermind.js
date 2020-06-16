@@ -1,4 +1,5 @@
 import * as React from "react";
+import Move from "./move";
 
 export default class Mastermind extends React.Component {
     MAX_COUNTER = 100;
@@ -40,7 +41,9 @@ export default class Mastermind extends React.Component {
                                    className="form-control"></input>
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-success">Play</button>
+                            <button onClick={this.play}
+                                    className="btn btn-success">Play
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -58,12 +61,40 @@ export default class Mastermind extends React.Component {
                                 <th>Evaluation</th>
                             </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                            {
+                                this.state.moves.map( (move,index) => <tr key={index}>
+                                    <td>{index+1}</td>
+                                    <td>{move.guess}</td>
+                                    <td>{move.message}</td>
+                                </tr>)
+                            }
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    play = () => {
+        let game = {...this.state};
+        game.tries++;
+        if (Number(game.guess) === game.secret) {
+            game.gameLevel++;
+            //TODO: check whether user wins
+            game.tries = 0;
+            game.moves = [];
+            game.secret = this.createSecret(game.gameLevel);
+            game.counter = this.MAX_COUNTER;
+        } else {
+            if (game.tries > 10){
+                //TODO: Player loses at this level
+            } else {
+                game.moves.push(new Move(game.guess,game.secret));
+            }
+        }
+        this.setState(game);
     }
 
     handleInputGuess = (e) => {
