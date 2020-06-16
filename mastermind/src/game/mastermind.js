@@ -1,6 +1,19 @@
 import * as React from "react";
 
 export default class Mastermind extends React.Component {
+    MAX_COUNTER = 100;
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            gameLevel: 3,
+            tries: 0,
+            moves: [],
+            counter: this.MAX_COUNTER,
+            guess: 123,
+            secret: 0
+        };
+    }
+
     render() {
         return (
             <div className="container">
@@ -11,15 +24,19 @@ export default class Mastermind extends React.Component {
                     <div className="card-body">
                         <div className="form-group">
                             <label htmlFor="gamelevel">Game Level:</label>
-                            <span id="gamelevel"></span>
+                            <span className="badge badge-info" id="gamelevel">{this.state.gameLevel}</span>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="gamelevel">Tries:</label>
-                            <span id="gamelevel"></span>
+                            <label htmlFor="tries">Tries:</label>
+                            <span className="badge badge-info"  id="tries">{this.state.tries}</span>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
-                            <input type="text" id="guess" className="form-control"></input>
+                            <input type="text"
+                                   value={this.state.guess}
+                                   onChange={this.handleInputGuess}
+                                   id="guess"
+                                   className="form-control"></input>
                         </div>
                         <div className="form-group">
                             <button className="btn btn-success">Play</button>
@@ -46,5 +63,10 @@ export default class Mastermind extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    handleInputGuess = (e) => {
+        let value = Number(e.target.value);
+        this.setState({guess: value});
     }
 }
