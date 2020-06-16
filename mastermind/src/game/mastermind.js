@@ -115,8 +115,8 @@ export default class Mastermind extends React.Component {
         if (Number(game.guess) === game.secret) {
             game.gameLevel++;
             game.wins++;
-            if (game.gameLevel === 10) {
-                //TODO: route to "player wins"
+            if (game.gameLevel === 5) {
+                this.props.history.push("/wins");
             }
             this.initGame(game);
         } else {
