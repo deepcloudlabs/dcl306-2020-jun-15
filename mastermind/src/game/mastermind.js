@@ -16,6 +16,24 @@ export default class Mastermind extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this.countDownTimer = setInterval(this.countDown, 1000);
+    }
+
+
+    componentWillUnmount() {
+        clearInterval(this.countDownTimer);
+    }
+
+    countDown = () => {
+        let game = {...this.state};
+        game.counter--;
+        if (game.counter <= 0) {
+            this.initGame(game);
+        }
+        this.setState(game);
+    }
+
     render() {
         return (
             <div className="container">
@@ -31,6 +49,10 @@ export default class Mastermind extends React.Component {
                         <div className="form-group">
                             <label htmlFor="tries">Tries:</label>
                             <span className="badge badge-info" id="tries">{this.state.tries}</span>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="counter">Counter:</label>
+                            <span className="badge badge-info" id="counter">{this.state.counter}</span>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
@@ -63,8 +85,8 @@ export default class Mastermind extends React.Component {
                             </thead>
                             <tbody>
                             {
-                                this.state.moves.map( (move,index) => <tr key={index}>
-                                    <td>{index+1}</td>
+                                this.state.moves.map((move, index) => <tr key={index}>
+                                    <td>{index + 1}</td>
                                     <td>{move.guess}</td>
                                     <td>{move.message}</td>
                                 </tr>)
@@ -82,19 +104,25 @@ export default class Mastermind extends React.Component {
         game.tries++;
         if (Number(game.guess) === game.secret) {
             game.gameLevel++;
-            //TODO: check whether user wins
-            game.tries = 0;
-            game.moves = [];
-            game.secret = this.createSecret(game.gameLevel);
-            game.counter = this.MAX_COUNTER;
+            if (game.gameLevel === 10) {
+                //TODO: route to "player wins"
+            }
+            this.initGame(game);
         } else {
-            if (game.tries > 10){
-                //TODO: Player loses at this level
+            if (game.tries > 10) {
+                this.initGame(game);
             } else {
-                game.moves.push(new Move(game.guess,game.secret));
+                game.moves.push(new Move(game.guess, game.secret));
             }
         }
         this.setState(game);
+    }
+
+    initGame = (game) => {
+        game.tries = 0;
+        game.moves = [];
+        game.secret = this.createSecret(game.gameLevel);
+        game.counter = this.MAX_COUNTER;
     }
 
     handleInputGuess = (e) => {
