@@ -33,6 +33,7 @@ export default class Mastermind extends React.Component {
         game.counter--;
         if (game.counter <= 0) {
             this.initGame(game);
+            game.loses++;
         }
         this.setState(game);
     }
@@ -99,7 +100,7 @@ export default class Mastermind extends React.Component {
                     </div>
                 </div>
                 <p></p>
-                <GameStatistics></GameStatistics>
+                <GameStatistics wins={this.state.wins} loses={this.state.loses}></GameStatistics>
             </div>
         );
     }
@@ -109,6 +110,7 @@ export default class Mastermind extends React.Component {
         game.tries++;
         if (Number(game.guess) === game.secret) {
             game.gameLevel++;
+            game.wins++;
             if (game.gameLevel === 10) {
                 //TODO: route to "player wins"
             }
@@ -116,6 +118,7 @@ export default class Mastermind extends React.Component {
         } else {
             if (game.tries > 10) {
                 this.initGame(game);
+                game.loses++;
             } else {
                 game.moves.push(new Move(game.guess, game.secret));
             }
