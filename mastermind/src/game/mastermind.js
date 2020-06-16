@@ -21,6 +21,14 @@ export default class Mastermind extends React.Component {
     }
 
     componentDidMount() {
+        let mastermind = localStorage.getItem("mastermind");
+        if (mastermind===null || mastermind === undefined){
+            localStorage.setItem("mastermind", JSON.stringify(this.state));
+        } else {
+            mastermind = JSON.parse(mastermind);
+            console.log(mastermind.secret);
+            this.setState(mastermind);
+        }
         this.countDownTimer = setInterval(this.countDown, 1000);
     }
 
@@ -36,6 +44,7 @@ export default class Mastermind extends React.Component {
             this.initGame(game);
             game.loses++;
         }
+        localStorage.setItem("mastermind", JSON.stringify(game));
         this.setState(game);
     }
 
@@ -60,7 +69,7 @@ export default class Mastermind extends React.Component {
                             <span className="badge badge-info" id="counter">{this.state.counter}</span>
                         </div>
                         <div className="form-group">
-                            <ProgressBar value={this.state.counter} min="1" max="100"/>
+                            <ProgressBar value={this.state.counter} min={1} max={100}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
@@ -127,6 +136,7 @@ export default class Mastermind extends React.Component {
                 game.moves.push(new Move(game.guess, game.secret));
             }
         }
+        localStorage.setItem("mastermind", JSON.stringify(game));
         this.setState(game);
     }
 
