@@ -2,6 +2,7 @@ import * as React from "react";
 
 export default class Mastermind extends React.Component {
     MAX_COUNTER = 100;
+
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -10,7 +11,7 @@ export default class Mastermind extends React.Component {
             moves: [],
             counter: this.MAX_COUNTER,
             guess: 123,
-            secret: 0
+            secret: this.createSecret(3)
         };
     }
 
@@ -28,7 +29,7 @@ export default class Mastermind extends React.Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="tries">Tries:</label>
-                            <span className="badge badge-info"  id="tries">{this.state.tries}</span>
+                            <span className="badge badge-info" id="tries">{this.state.tries}</span>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
@@ -51,11 +52,11 @@ export default class Mastermind extends React.Component {
                     <div className="card-body">
                         <table className="table table-responsive table-bordered table-hover table-striped">
                             <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Guess</th>
-                                    <th>Evaluation</th>
-                                </tr>
+                            <tr>
+                                <th>No</th>
+                                <th>Guess</th>
+                                <th>Evaluation</th>
+                            </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -68,5 +69,24 @@ export default class Mastermind extends React.Component {
     handleInputGuess = (e) => {
         let value = Number(e.target.value);
         this.setState({guess: value});
+    }
+
+    createSecret = (level) => {
+        let digits = [];
+        digits.push(this.createDigit(1, 9));
+        while (digits.length < level) {
+            let digit = this.createDigit(0, 9);
+            if (!digits.includes(digit))
+                digits.push(digit);
+        }
+        let value = 0;
+        for (let digit of digits)
+            value = 10 * value + digit;
+        console.log(`Secret is created: ${value}`);
+        return value;
+    }
+
+    createDigit = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
