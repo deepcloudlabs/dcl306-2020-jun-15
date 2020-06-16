@@ -60,7 +60,7 @@ export default class Mastermind extends React.Component {
                             <span className="badge badge-info" id="counter">{this.state.counter}</span>
                         </div>
                         <div className="form-group">
-                            <ProgressBar />
+                            <ProgressBar value={this.state.counter} min="1" max="100"/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
