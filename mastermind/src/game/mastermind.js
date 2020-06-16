@@ -1,6 +1,7 @@
 import * as React from "react";
 import Move from "./move";
 import GameStatistics from "../statistics/game-statistics";
+import ProgressBar from "../component/progress-bar";
 
 export default class Mastermind extends React.Component {
     MAX_COUNTER = 100;
@@ -57,6 +58,9 @@ export default class Mastermind extends React.Component {
                         <div className="form-group">
                             <label htmlFor="counter">Counter:</label>
                             <span className="badge badge-info" id="counter">{this.state.counter}</span>
+                        </div>
+                        <div className="form-group">
+                            <ProgressBar />
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
