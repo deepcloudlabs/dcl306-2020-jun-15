@@ -61,9 +61,9 @@ export default class Employee extends React.Component {
                                 onChange={this.props.handleInput}
                                 className="form-control">
                             <option>IT</option>
-                            <option>SALES</option>
+                            <option>Sales</option>
                             <option>HR</option>
-                            <option>FINANCE</option>
+                            <option>Finance</option>
                         </select>
                     </div>
                     <div className="form-group">
@@ -87,7 +87,7 @@ export default class Employee extends React.Component {
                             <input type="checkbox"
                                    name="fulltime"
                                    id="fulltime"
-                                   chekced={this.props.employee.fulltime}
+                                   checked={this.props.employee.fulltime}
                                    onChange={this.props.handleInput}
                                    className="form-check-input"></input>
                             <label htmlFor="fulltime">Full time?</label>
@@ -98,7 +98,7 @@ export default class Employee extends React.Component {
                                 onClick={this.props.findEmployee}>Find Employee
                         </button>
                         <button type="submit" className="btn btn-success"
-                                onClick={this.props.hireEmployee}>Hire Employee
+                                onClick={() => this.props.hireEmployee(this.props.employee)}>Hire Employee
                         </button>
                         <button type="submit" className="btn btn-danger"
                                 onClick={this.props.fireEmployee}>Fire Employee

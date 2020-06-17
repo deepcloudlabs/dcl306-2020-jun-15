@@ -21,8 +21,11 @@ export default function EmployeeReducer(state, action) {
             break;
         case "handleFile":
             // input file
-            newState.employee.photo = action.data;
+            newState.employee.photo = action.photo;
             showSuccessMessage("Image is loaded!");
+            break;
+        case "hire":
+            showSuccessMessage(action.response.status);
             break;
         default:
             break;

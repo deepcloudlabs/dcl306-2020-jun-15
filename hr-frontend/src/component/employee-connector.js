@@ -2,25 +2,36 @@ import Employee from "./employee-component";
 import {connect} from "react-redux";
 
 
-let mapStateToProps = function(state){
+let mapStateToProps = function(store){
     return {
-        employee: state.employeeStore.employee // field
+        employee: store.employeeStore.employee // field
     }
 };
 let mapDispatchToProps = function(dispatch){
     return {
         findEmployee : function(dispatch){},
         fireEmployee : function(dispatch){},
-        hireEmployee : function(dispatch){},
-        updateEmployee : function(dispatch){},
-        handleInput : function(event){
-            return dispatch({type: "change", event});
+        hireEmployee : async (emp) => {
+            let response = await fetch("http://localhost:4001/employees",{
+                method: "POST",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(emp)
+            }).then(res => res.json());
+            return dispatch({type: "hire", response});
         },
-        handleFileInput : function(event){
+        updateEmployee : function(dispatch){},
+        handleInput : (event) => {
+            let changeInputAction = {type: "change", event};
+            return dispatch(changeInputAction);
+        },
+        handleFileInput : (event) => {
             let reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
             reader.onload = (e) => {
-                dispatch({type: "handleFile", data : e.target.result });
+                dispatch({type: "handleFile", photo : e.target.result });
             }
         }
     };

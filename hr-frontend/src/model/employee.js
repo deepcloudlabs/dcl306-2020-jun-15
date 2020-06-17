@@ -2,7 +2,7 @@ import {Config} from "../utility/hr-utility";
 
 export default class EmployeeModel {
     constructor(identityNo = "36271732494",
-                fullname="Jack Bauer",
+                fullname="Kate Austen",
                 iban = "TR298167364121525592890059",
                 photo = Config.NO_IMAGE,
                 birthYear = 1995,
