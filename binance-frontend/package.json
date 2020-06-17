@@ -1,28 +1,24 @@
 {
-  "name": "lottery",
+  "name": "binance-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.0",
-    "prop-types": "^15.7.2",
+    "chart.js": "^2.9.3",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "set PORT=5000 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "jest": {
-      "verbose": true
   },
   "eslintConfig": {
     "extends": "react-app"

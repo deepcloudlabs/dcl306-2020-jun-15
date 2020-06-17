@@ -2,7 +2,7 @@ import * as React from "react";
 import LotteryRow from "./lottery-row";
 import PropTypes from "prop-types";
 
-export default class Lottery extends React.Component {
+export default class Lottery extends React.PureComponent {
     static propTypes = {
         min: PropTypes.number,
         max: PropTypes.number,
@@ -21,7 +21,12 @@ export default class Lottery extends React.Component {
             column: 1
         }
     }
-
+/*
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        //return nextState.numbers.length != this.state.numbers.length;
+        return nextState.column != this.state.column;
+    }
+*/
     /*
     componentDidMount() {
         setInterval(()=>{
@@ -33,6 +38,7 @@ export default class Lottery extends React.Component {
     }
 */
     render() {
+        console.log("Lottery --> render()")
         let resetButton = "";
         let lotteryNumbersCard = "";
         if (this.state.numbers.length > 0) {
