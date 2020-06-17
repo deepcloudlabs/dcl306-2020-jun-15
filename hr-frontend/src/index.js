@@ -8,8 +8,10 @@ import 'toastr/build/toastr.css';
 import {combineReducers, createStore} from "redux";
 import EmployeeReducer from "./reducers/employee-reducer";
 import {Provider} from "react-redux";
+import EmployeeListReducer from "./reducers/employee-list-reducer";
+
 // reducer : (state,action) -> new state
-let reducers = combineReducers({employeeStore: EmployeeReducer});
+let reducers = combineReducers({employeeStore: EmployeeReducer, employeeListStore: EmployeeListReducer});
 let store = createStore(reducers);
 
 console.log(store.getState())
