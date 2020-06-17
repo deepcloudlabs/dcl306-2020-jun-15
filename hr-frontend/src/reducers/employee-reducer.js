@@ -27,6 +27,10 @@ export default function EmployeeReducer(state, action) {
         case "hire":
             showSuccessMessage(action.response.status);
             break;
+        case "find":
+            newState.employee = action.employee;
+            showSuccessMessage(`Fetched: ${action.employee.fullname}`);
+            break;
         default:
             break;
     }

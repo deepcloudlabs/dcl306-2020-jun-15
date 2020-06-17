@@ -95,7 +95,7 @@ export default class Employee extends React.Component {
                     </div>
                     <div>
                         <button type="submit" className="btn btn-success"
-                                onClick={this.props.findEmployee}>Find Employee
+                                onClick={() => this.props.findEmployee(this.props.employee.identityNo)}>Find Employee
                         </button>
                         <button type="submit" className="btn btn-success"
                                 onClick={() => this.props.hireEmployee(this.props.employee)}>Hire Employee
