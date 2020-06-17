@@ -7,7 +7,7 @@ export default class EmployeeModel {
                 photo = Config.NO_IMAGE,
                 birthYear = 1995,
                 salary = 100000,
-                department = "SALES",
+                department = "Sales",
                 fulltime = true
                 ) {
         this.identityNo = identityNo;
