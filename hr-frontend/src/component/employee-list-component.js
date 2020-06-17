@@ -38,7 +38,8 @@ export default class EmployeeList extends React.Component {
                                 <td>{emp.salary}</td>
                                 <td>{emp.department}</td>
                                 <td>{emp.fulltime ? 'FULL-TIME' : 'PART-TIME'}</td>
-                                <td><button className="btn btn-danger">Fire</button></td>
+                                <td><button onClick={() => this.props.fireEmployeeRow(emp.identityNo)}
+                                            className="btn btn-danger">Fire</button></td>
                             </tr>)
                         }
                         </tbody>

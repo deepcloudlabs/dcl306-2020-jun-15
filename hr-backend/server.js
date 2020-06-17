@@ -42,6 +42,7 @@ const employeeSchema = new mongoose.Schema({
     "identityNo": {
         type: String,
         required: true,
+        unique: true,
         validate: [utils.tcKimlikNoValidator, 'You must provide a valid identity no.']
     },
     "photo": {
@@ -72,7 +73,7 @@ const employeeSchema = new mongoose.Schema({
     },
     "department": {
         type: String,
-        enum: ["IT", "Sales", "Finance", "HR"],
+        //enum: ["IT", "Sales", "Finance", "HR"],
         default: "Sales"
     }
 });
