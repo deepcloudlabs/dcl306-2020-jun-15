@@ -6,7 +6,9 @@ export default function EmployeeListReducer(state, action) {
     }
     let newState = {...state};
     switch(action.type){
-        // TODO: implement actions
+        case "retrieve":
+            newState.employees = action.employees;
+            break;
     }
     return newState;
 }

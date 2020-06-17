@@ -10,7 +10,9 @@ let mapStateToProps = function (store) {
 let mapDispatchToProps = function (dispatch) {
     return {
         findEmployees: () => {
-            // TODO: implement find employees
+            fetch("http://localhost:4001/employees")
+                .then(res => res.json())
+                .then( employees => dispatch({type: "retrieve", employees}) );
         }
     }
 }

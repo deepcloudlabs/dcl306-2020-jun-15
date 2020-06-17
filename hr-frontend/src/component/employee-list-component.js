@@ -22,6 +22,7 @@ export default class EmployeeList extends React.Component {
                                 <th>Salary</th>
                                 <th>Department</th>
                                 <th>Fulltime</th>
+                                <th>Operations</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +38,7 @@ export default class EmployeeList extends React.Component {
                                 <td>{emp.salary}</td>
                                 <td>{emp.department}</td>
                                 <td>{emp.fulltime ? 'FULL-TIME' : 'PART-TIME'}</td>
+                                <td><button className="btn btn-danger">Fire</button></td>
                             </tr>)
                         }
                         </tbody>
