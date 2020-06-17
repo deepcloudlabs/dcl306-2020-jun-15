@@ -1,5 +1,5 @@
 import EmployeeModel from "../model/employee";
-import {showSuccessMessage} from "../utility/toastr-util";
+import {showInfoMessage, showSuccessMessage} from "../utility/toastr-util";
 
 export default function EmployeeReducer(state, action) {
     if (state === undefined) {
@@ -30,6 +30,13 @@ export default function EmployeeReducer(state, action) {
         case "find":
             newState.employee = action.employee;
             showSuccessMessage(`Fetched: ${action.employee.fullname}`);
+            break;
+        case "fire":
+            newState.employee = action.employee;
+            showInfoMessage(`${newState.employee.fullname} is fired!`);
+            break;
+        case "update":
+            showSuccessMessage(`Updated: ${newState.employee.fullname}`);
             break;
         default:
             break;

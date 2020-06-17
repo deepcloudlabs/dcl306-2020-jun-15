@@ -101,10 +101,10 @@ export default class Employee extends React.Component {
                                 onClick={() => this.props.hireEmployee(this.props.employee)}>Hire Employee
                         </button>
                         <button type="submit" className="btn btn-danger"
-                                onClick={this.props.fireEmployee}>Fire Employee
+                                onClick={() => this.props.fireEmployee(this.props.employee.identityNo)}>Fire Employee
                         </button>
                         <button type="submit" className="btn btn-warning"
-                                onClick={this.props.updateEmployee}>Update Employee
+                                onClick={() => this.props.updateEmployee(this.props.employee)}>Update Employee
                         </button>
                     </div>
                 </div>
